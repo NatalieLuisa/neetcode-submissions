@@ -1,0 +1,27 @@
+class Solution:
+    def minimizeMax(self, nums: List[int], p: int) -> int:
+        if p == 0:
+                return 0   
+        def isvalid(k):
+            i = 0 
+            cnt = 0 
+            while i < len(nums) - 1:
+                if abs(nums[i] - nums[i+1]) <= k:
+                    cnt +=1
+                    i+=2
+                else:
+                    i+=1  
+                if cnt == p:
+                    return True 
+            return False 
+        nums.sort()
+        l , r = 0 , 10**9
+        res = 10**9
+        while l < r:
+            m = (l+r)//2
+            if isvalid(m):
+                res = m
+                r = m
+            else:
+                l = m + 1
+        return res
